@@ -11,6 +11,7 @@ var tMethod
 
 function runRawData(){
   //divide and place the corresponding raw data into the correct divided data below
+  var rawData = document.getElementById("RawData").value; // make sure .value is correct for getting this string!
   alert("Still a WIP")
   //runDivData();
 }
