@@ -22,8 +22,8 @@ function runRawData(){
   document.getElementById("endDate").value=eDate;
   //sTime is next, however it could be either XX:XX or X:XX so you have to take that into account!
   // I'm going to use spaces to cut apart the different parts moving forward, I'll need a new variable i.e. updatedRaw
-  var updatedRaw = rawData.slice(18);
-  var findNext = updatedRaw.search(" ");  // have issue here!
+  var updatedRaw = rawData.slice(19);// which is it 18 or 19?
+  var findNext = updatedRaw.search(/\s/);  // maybe an issue with updatedRaw.
   var sTime = updatedRaw.splice(0,findNext);
   document.getElementById("startTime").value=sTime;
 }
