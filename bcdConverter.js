@@ -22,10 +22,16 @@ function runRawData(){
   document.getElementById("endDate").value=eDate;
   //sTime is next, however it could be either XX:XX or X:XX so you have to take that into account!
   // I'm going to use spaces to cut apart the different parts moving forward, I'll need a new variable i.e. updatedRaw
-  var updatedRaw = rawData.slice(19);// which is it 18 or 19?
-  var findNext = updatedRaw.search(/\s/);  // maybe an issue with updatedRaw.
-  var sTime = updatedRaw.splice(0,findNext);
+  var updatedRaw = rawData.slice(18);
+  var findNext = updatedRaw.search(/\s/);  
+  var sTime = updatedRaw.slice(0,findNext+3); // this still needs to be worked with
+  sTime.trim();// <-- this line causes problems
   document.getElementById("startTime").value=sTime;
+  var updatedRaw = updatedRaw.slice(findNext+3); // same here
+  var findNext = updatedRaw.search(/\s/);
+  var eTime = updatedRaw.slice(0,findNext+3); // same here
+  eTime.trim();
+  document.getElementById("endTime").value=eTime;
 }
 
 function runDivData(){
