@@ -33,11 +33,13 @@ function runRawData(){
   var eTime = updatedRaw.slice(0,findNext+3); // same here
   eTime.trim();
   document.getElementById("endTime").value=eTime;
-  var updatedRaw = updatedRaw.slice(findNext); // below this line doesn't work
+  var updatedRaw = updatedRaw.slice(findNext);
   var findLast = updatedRaw.lastIndexOf(" ");
-  var tMethod = updatedRaw.splice(findLast, updatedRaw.length);
+  var tMethod = updatedRaw.slice(findLast, updatedRaw.length);
   tMethod.trim();
   document.getElementById("transferMethod").value=tMethod;
+  var updatedRaw = updatedRaw.slice(0, findLast-1);
+  var findLast = updatedRaw.lastIndexOf(" ");
 }
 
 function runDivData(){
