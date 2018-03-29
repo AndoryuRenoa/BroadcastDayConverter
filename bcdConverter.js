@@ -14,6 +14,11 @@ function runRawData(){
   var rawData = document.getElementById("RawData").value; // make sure .value is correct for getting this string!
   alert("Still a WIP")
   //runDivData();
+  var sDate = rawData.slice(0,8);
+  document.getElementById("startDate").value=sDate;
+  var eDate = rawData.slice(9,17);
+  document.getElementById("endDate").value=eDate;
+  //sTime is next, however it could be either XX:XX or X:XX so you have to take that into account!
 }
 
 function runDivData(){
