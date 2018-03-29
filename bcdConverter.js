@@ -9,6 +9,7 @@ var isciLength;
 var rotation;
 var tMethod;
 var updatedRaw;
+var findNext;
 
 function runRawData(){
   //divide and place the corresponding raw data into the correct divided data below
@@ -21,6 +22,10 @@ function runRawData(){
   document.getElementById("endDate").value=eDate;
   //sTime is next, however it could be either XX:XX or X:XX so you have to take that into account!
   // I'm going to use spaces to cut apart the different parts moving forward, I'll need a new variable i.e. updatedRaw
+  var updatedRaw = rawData.slice(18);
+  var findNext = updatedRaw.search(" ");
+  var sTime = updatedRaw.splice(0,findNext);
+  document.getElementById("startTime").value=sTime; // have issue here!
 }
 
 function runDivData(){
