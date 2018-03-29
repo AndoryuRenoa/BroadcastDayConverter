@@ -47,3 +47,5 @@ function runDivData(){
   alert("Still a WIP")
   //output will go in elementById"output"
 }
+
+// 04/01/18 04/01/18 12:00 AM 11:59 PM DOWN MON 10/9C ABC25883SH :30 50% ER
