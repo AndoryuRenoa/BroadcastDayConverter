@@ -1,13 +1,14 @@
-var rawData
-var sDate
-var eDate
-var sTime
-var eTime
-var cName
-var isci
-var isciLength
-var rotation
-var tMethod
+var rawData;
+var sDate;
+var eDate;
+var sTime;
+var eTime;
+var cName;
+var isci;
+var isciLength;
+var rotation;
+var tMethod;
+var updatedRaw;
 
 function runRawData(){
   //divide and place the corresponding raw data into the correct divided data below
@@ -19,6 +20,7 @@ function runRawData(){
   var eDate = rawData.slice(9,17);
   document.getElementById("endDate").value=eDate;
   //sTime is next, however it could be either XX:XX or X:XX so you have to take that into account!
+  // I'm going to use spaces to cut apart the different parts moving forward, I'll need a new variable i.e. updatedRaw
 }
 
 function runDivData(){
