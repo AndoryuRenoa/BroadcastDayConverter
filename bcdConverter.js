@@ -1,21 +1,41 @@
 var rawData;
 var sDate;
+var oSMonth;
+var sMonth;
+var sDay;
+var oSDay;
+var sYear;
+var oSYear;
 var eDate;
+var eDay;
+var oEDay;
+var eMonth;
+var oEMonth;
+var eYear;
+var oEYear;
 var sTime;
 var eTime;
 var cName;
 var isci;
-var isciLength;
+var length;
 var rotation;
 var tMethod;
 var updatedRaw;
 var findNext;
 var findLast;
+var sTimeHours;
+var sTimeMinutes;
+var sTimeMilitary;
+var eTimeHours;
+var eTimeMinutes;
+var eTimeMilitary;
+var PMtest;
+var startIns1;
+var startIns2;
 
 function runRawData(){
   //divide and place the corresponding raw data into the correct divided data below
   var rawData = document.getElementById("RawData").value; // make sure .value is correct for getting this string!
-  alert("Still a WIP")
   //runDivData();
   var sDate = rawData.slice(0,8);
   document.getElementById("startDate").value=sDate;
@@ -36,16 +56,80 @@ function runRawData(){
   var updatedRaw = updatedRaw.slice(findNext);
   var findLast = updatedRaw.lastIndexOf(" ");
   var tMethod = updatedRaw.slice(findLast, updatedRaw.length);
-  tMethod.trim();
+  tMethod=tMethod.trim();
   document.getElementById("transferMethod").value=tMethod;
-  var updatedRaw = updatedRaw.slice(0, findLast-1);
+  var updatedRaw = updatedRaw.slice(0, findLast);
   var findLast = updatedRaw.lastIndexOf(" ");
+  var rotation = updatedRaw.slice(findLast, updatedRaw.length);
+  rotation = rotation.trim();
+  document.getElementById("rotation").value=rotation;
+  var updatedRaw = updatedRaw.slice(0, findLast);
+  var findLast = updatedRaw.lastIndexOf(" ");
+  var length = updatedRaw.slice(findLast, updatedRaw.length);
+  length = length.trim();
+  document.getElementById("length").value=length;
+  var updatedRaw = updatedRaw.slice(0, findLast);
+  var findLast = updatedRaw.lastIndexOf(" ");
+  var isci = updatedRaw.slice(findLast, updatedRaw.length);
+  isci = isci.trim(); // should have if statement here to test if there is a space before the H
+  document.getElementById("isci").value=isci;
+  var cName = updatedRaw.slice(0, findLast);
+  document.getElementById("creative").value = cName;
+ 
+  runDivData();
 }
 
+
 function runDivData(){
-  // this will house the logic for converting from regular day into broadcast day
-  alert("Still a WIP")
-  //output will go in elementById"output"
+	// converts start time to military time (unfinished)
+	var startTime= document.getElementById("startTime").value;
+	var findNext = startTime.search(":");
+	var sTimeHours = startTime.slice(0,findNext);
+	var sTimeMinutes = startTime.slice(findNext+1, findNext+3);
+	var PMtest = startTime.endsWith("PM");
+	if (PMtest == true){
+		sTimeHours = parseInt(sTimeHours)+12;
+			if (sTimeHours == 24) {
+				sTimeHours = 12 ;
+			}
+	}
+	if (PMtest == false){
+		if (sTimeHours == 12){
+			sTimeHours=0;
+		}
+	}
+	
+	//breaks apart start date
+	var sDate = document.getElementById("startDate").value;
+	var sMonth = parseInt(sDate.slice(0,2));
+	var sDay = parseInt(sDate.slice(3,5));
+	var sYear = parseInt(sDate.slice(6));
+	
+	//breaks apart end date
+	var eDate = document.getElementById("endDate").value;
+	var eMonth = parseInt(sDate.slice(0,2));
+	var eDay = parseInt(sDate.slice(3,5));
+	var eYear = parseInt(sDate.slice(6));
+	
+	//test broadcast day for instruction start 
+	if (sTimeHours < 6){
+		oSDay = sDay
+		sDay = sDay - 1;
+		if (sDay == 0){
+			sMonth = sMonth - 1;
+			// should give options for every month of the year below for new sDay
+			sDay = 31;
+		}
+		// need boolean check for contining to next day
+		if(sDate == eDate){
+			
+		startIns1 = sMonth+"/"+sDay+ " " +sMonth+"/"+sDay+" "+sTimeHours+":"+sTimeMinutes+" "+isci;
+		  document.getElementById("output").innerHTML=startIns1;
+		}
+	}
+	
+  alert(" "+sMonth+"/"+sDay);
+  
 }
 
 // 04/01/18 04/01/18 12:00 AM 11:59 PM DOWN MON 10/9C ABC25883SH :30 50% ER
