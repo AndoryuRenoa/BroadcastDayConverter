@@ -83,6 +83,7 @@ function runRawData(){
 
 function runDivData(){
 	// converts start time to military time (unfinished)
+	alert("Thank you for trying my converter! This requires testing before it can be relied on. If you see something wrong please tell me -Andrew");
 	var startTime= document.getElementById("startTime").value;
 	var findNext = startTime.search(":");
 	var sTimeHours = startTime.slice(0,findNext);
@@ -161,8 +162,15 @@ function runDivData(){
 		}
 		else{
 			if(eTimeHours >=6){
+				oEDay = eDay -1;
+				oEMonth=eMonth;
+				if (oEDay ==0){ // this does not seem to work.
+					var oEDay = 31;
+					var oEMonth = oEMonth-1;
+					alert("check days! anything labeled 30th should be 1 day from end of month");
+				}
 				var startIns1 = sMonth+"/"+sDay+ " " +sMonth+"/"+sDay+" "+sTimeHours+":"+sTimeMinutes+" "+ "05:59:59 " +isci;
-				var startIns2 = oSMonth+"/"+oSDay+ " " +eMonth+"/"+eDay+" 06:00:00 "+"5:59:59" +isci;
+				var startIns2 = oSMonth+"/"+oSDay+ " " +oEMonth+"/"+oEDay+" 06:00:00 "+"5:59:59" +isci;
 				var startIns3 = eMonth+"/"+eDay+" "+eMonth+"/"+eDay+" 06:00:00 "+eTimeHours+":"+eTimeMinutes+" "+isci;
 				document.getElementById("output").innerHTML=startIns1+"<br>"+startIns2+"<br>"+startIns3;
 			} if (eTimeHours< 6){
@@ -226,7 +234,7 @@ function runDivData(){
 					var eDay = 31;
 					alert("check days! anything labeled 30th should be 1 day from end of month");
 					// again not accounting for the different values of months (would be best to write a function for this):
-				}	
+					}	
 				if (oEDay ==0){ // this does not seem to work.
 					var oEDay = 31;
 					var oEMonth = oEMonth-1;
