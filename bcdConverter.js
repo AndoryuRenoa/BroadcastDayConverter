@@ -165,21 +165,31 @@ function runDivData(){
 				var startIns3 = eMonth+"/"+eDay+" "+eMonth+"/"+eDay+" 06:00:00 "+eTimeHours+":"+eTimeMinutes+" "+isci;
 				document.getElementById("output").innerHTML=startIns1+"<br>"+startIns2+"<br>"+startIns3;
 			} if (eTimeHours<6){
-				oEDay = eDay;
+				oEDay = eDay -2; 
 				oEMonth = eMonth;
 				eDay = eDay - 1;
 				if (eDay ==0){
-					eMonth = eMonth -1;
+					var eMonth = eMonth -1;
+					var eDay = 31;
 					// again not accounting for the different values of months (would be best to write a function for this):
-					eDay = 31;
-				} if (eDay == oSDay){
+				}	
+				if (oEDay ==0){ // this does not seem to work.
+					var oEDay = 31;
+					var oEMonth = oEMonth-1;
+					// again not accounting for the different values of months (would be best to write a function for this):
+				}
+				if (oEDay ==-1){
+					var oEDay = 30;
+					var oEMonth = oEMonth-1;
+					// again not accounting for the different values of months (would be best to write a function for this):
+				} if (eDay == oSDay && eMonth == oSMonth){ // this seems to work 
 					var startIns1 = sMonth+"/"+sDay+ " " +sMonth+"/"+sDay+" "+sTimeHours+":"+sTimeMinutes+" "+ "05:59:59 " +isci;
 					var startIns2 = eMonth+"/"+eDay+" "+eMonth+"/"+eDay+" 06:00:00 "+eTimeHours+":"+eTimeMinutes+" "+isci;
 					document.getElementById("output").innerHTML=startIns1+"<br>"+startIns2;					
 				}
 				else{
 					var startIns1 = sMonth+"/"+sDay+ " " +sMonth+"/"+sDay+" "+sTimeHours+":"+sTimeMinutes+" "+ "05:59:59 " +isci;
-					var startIns2 = oSMonth+"/"+oSDay+ " " +eMonth+"/"+eDay+" 06:00:00 "+"5:59:59" +isci;
+					var startIns2 = oSMonth+"/"+oSDay+ " " +oEMonth+"/"+oEDay+" 06:00:00 "+"5:59:59" +isci;
 					var startIns3 = eMonth+"/"+eDay+" "+eMonth+"/"+eDay+" 06:00:00 "+eTimeHours+":"+eTimeMinutes+" "+isci;
 					document.getElementById("output").innerHTML=startIns1+"<br>"+startIns2+"<br>"+startIns3;
 				}
