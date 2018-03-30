@@ -99,6 +99,25 @@ function runDivData(){
 		}
 	}
 	
+	// converts end time to military time (unfinished)
+	var endTime= document.getElementById("endTime").value;
+	var findNext = endTime.search(":");
+	var eTimeHours = endTime.slice(0,findNext);
+	var eTimeMinutes = endTime.slice(findNext+1, findNext+3);
+	var PMtest = endTime.endsWith("PM");
+	if (PMtest == true){
+		eTimeHours = parseInt(eTimeHours)+12;
+			if (eTimeHours == 24) {
+				eTimeHours = 12 ;
+			}
+	}
+	if (PMtest == false){
+		if (eTimeHours == 12){
+			eTimeHours=0;
+		}
+	}
+
+	
 	//breaks apart start date
 	var sDate = document.getElementById("startDate").value;
 	var sMonth = parseInt(sDate.slice(0,2));
@@ -111,6 +130,9 @@ function runDivData(){
 	var eDay = parseInt(sDate.slice(3,5));
 	var eYear = parseInt(sDate.slice(6));
 	
+	//sets isci
+	var isci = document.getElementById("isci").value;
+	
 	//test broadcast day for instruction start 
 	if (sTimeHours < 6){
 		oSDay = sDay
@@ -122,13 +144,16 @@ function runDivData(){
 		}
 		// need boolean check for contining to next day
 		if(sDate == eDate){
-			
-		startIns1 = sMonth+"/"+sDay+ " " +sMonth+"/"+sDay+" "+sTimeHours+":"+sTimeMinutes+" "+isci;
-		  document.getElementById("output").innerHTML=startIns1;
+			if (eTimeHours > 6){
+				var startIns1 = sMonth+"/"+sDay+ " " +sMonth+"/"+sDay+" "+sTimeHours+":"+sTimeMinutes+" "+ "05:59:59 " +isci;
+				var startIns2 = sMonth+"/"+sDay+ " " +sMonth+"/"+sDay+" 06:00:00 "+eTimeHours+":"+eTimeMinutes+isci;
+				document.getElementById("output").innerHTML=startIns1+"<br>"+startIns2;
+		  }
+		  
 		}
 	}
 	
-  alert(" "+sMonth+"/"+sDay);
+  alert("Still a work in progress! (Need to program unequal dates and end times ending on previous broadcast day)");
   
 }
 
