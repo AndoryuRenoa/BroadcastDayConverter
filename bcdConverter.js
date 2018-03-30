@@ -146,7 +146,7 @@ function runDivData(){
 		}
 		// need boolean check for contining to next day
 		if(sDate == eDate){
-			if (eTimeHours > 6){
+			if (eTimeHours >= 6){
 				var startIns1 = sMonth+"/"+sDay+ " " +sMonth+"/"+sDay+" "+sTimeHours+":"+sTimeMinutes+" "+ "05:59:59 " +isci;
 				var startIns2 = oSMonth+"/"+oSDay+ " " +oSMonth+"/"+oSDay+" 06:00:00 "+eTimeHours+":"+eTimeMinutes+isci;
 				document.getElementById("output").innerHTML=startIns1+"<br>"+startIns2;
@@ -159,12 +159,12 @@ function runDivData(){
 			}
 		}
 		else{
-			if(eTimeHours >6){
+			if(eTimeHours >=6){
 				var startIns1 = sMonth+"/"+sDay+ " " +sMonth+"/"+sDay+" "+sTimeHours+":"+sTimeMinutes+" "+ "05:59:59 " +isci;
 				var startIns2 = oSMonth+"/"+oSDay+ " " +eMonth+"/"+eDay+" 06:00:00 "+"5:59:59" +isci;
 				var startIns3 = eMonth+"/"+eDay+" "+eMonth+"/"+eDay+" 06:00:00 "+eTimeHours+":"+eTimeMinutes+" "+isci;
 				document.getElementById("output").innerHTML=startIns1+"<br>"+startIns2+"<br>"+startIns3;
-			} if (eTimeHours<6){
+			} if (eTimeHours< 6){
 				oEDay = eDay -2; 
 				oEMonth = eMonth;
 				eDay = eDay - 1;
