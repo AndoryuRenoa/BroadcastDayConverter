@@ -1,5 +1,5 @@
 # BroadcastDayConverter
-Simple app for converting instructions to broadcast day
+Simple app for converting ad copy instructions to broadcast day
 
 
 
