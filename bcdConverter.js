@@ -135,7 +135,8 @@ function runDivData(){
 	
 	//test broadcast day for instruction start 
 	if (sTimeHours < 6){
-		oSDay = sDay
+		oSDay = sDay;
+		oSMonth = sMonth;
 		sDay = sDay - 1;
 		if (sDay == 0){
 			sMonth = sMonth - 1;
@@ -146,7 +147,7 @@ function runDivData(){
 		if(sDate == eDate){
 			if (eTimeHours > 6){
 				var startIns1 = sMonth+"/"+sDay+ " " +sMonth+"/"+sDay+" "+sTimeHours+":"+sTimeMinutes+" "+ "05:59:59 " +isci;
-				var startIns2 = sMonth+"/"+sDay+ " " +sMonth+"/"+sDay+" 06:00:00 "+eTimeHours+":"+eTimeMinutes+isci;
+				var startIns2 = oSMonth+"/"+oSDay+ " " +oSMonth+"/"+oSDay+" 06:00:00 "+eTimeHours+":"+eTimeMinutes+isci;
 				document.getElementById("output").innerHTML=startIns1+"<br>"+startIns2;
 		  }
 		  
