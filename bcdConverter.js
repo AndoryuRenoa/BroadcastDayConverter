@@ -74,7 +74,7 @@ function runRawData(){
   var isci = updatedRaw.slice(findLast, updatedRaw.length);
   isci = isci.trim(); // should have if statement here to test if there is a space before the H
   document.getElementById("isci").value=isci;
-  var cName = updatedRaw.slice(0, findLast);
+  var cName = updatedRaw.slice(3, findLast); // didn't measure this slice
   document.getElementById("creative").value = cName;
  
   runDivData();
