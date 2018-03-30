@@ -202,13 +202,13 @@ function runDivData(){
 	}
 	else{
 		if(sDate == eDate){
-			if (eTimeHours >= 6){
+			if (eTimeHours < 6){
 				alert ("end date/time cannot be before start time");
 		  }
-		  if (eTimeHours < 6){
+		  if (eTimeHours >= 6){
 
-			  var startIns2 = sMonth+"/"+sDay+ " " +sMonth+"/"+sDay+" 06:00:00 "+eTimeHours+":"+eTimeMinutes+isci;
-			  document.getElementById("output").innerHTML=startIns1+"<br>"+startIns2;
+			  var startIns2 = sMonth+"/"+sDay+ " " +sMonth+"/"+sDay+" "+sTimeHours+":"+sTimeMinutes+" "+eTimeHours+":"+eTimeMinutes+isci;
+			  document.getElementById("output").innerHTML=startIns2;
 		  
 			}
 		}
