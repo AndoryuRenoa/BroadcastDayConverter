@@ -32,6 +32,7 @@ var eTimeMilitary;
 var PMtest;
 var startIns1;
 var startIns2;
+var startIns3;
 
 function runRawData(){
   //divide and place the corresponding raw data into the correct divided data below
@@ -73,7 +74,7 @@ function runRawData(){
   var isci = updatedRaw.slice(findLast, updatedRaw.length);
   isci = isci.trim(); // should have if statement here to test if there is a space before the H
   document.getElementById("isci").value=isci;
-  var cName = updatedRaw.slice(0, findLast);
+  var cName = updatedRaw.slice(3, findLast); // didn't measure this slice
   document.getElementById("creative").value = cName;
  
   runDivData();
@@ -82,6 +83,7 @@ function runRawData(){
 
 function runDivData(){
 	// converts start time to military time (unfinished)
+	alert("Thank you for trying my converter! This requires testing before it can be relied on. If you see something wrong please tell me -Andrew");
 	var startTime= document.getElementById("startTime").value;
 	var findNext = startTime.search(":");
 	var sTimeHours = startTime.slice(0,findNext);
@@ -126,9 +128,9 @@ function runDivData(){
 	
 	//breaks apart end date
 	var eDate = document.getElementById("endDate").value;
-	var eMonth = parseInt(sDate.slice(0,2));
-	var eDay = parseInt(sDate.slice(3,5));
-	var eYear = parseInt(sDate.slice(6));
+	var eMonth = parseInt(eDate.slice(0,2));
+	var eDay = parseInt(eDate.slice(3,5));
+	var eYear = parseInt(eDate.slice(6));
 	
 	//sets isci
 	var isci = document.getElementById("isci").value;
@@ -142,21 +144,122 @@ function runDivData(){
 			sMonth = sMonth - 1;
 			// should give options for every month of the year below for new sDay
 			sDay = 31;
+			alert("check days assuming a 31 day month!");
 		}
 		// need boolean check for contining to next day
 		if(sDate == eDate){
-			if (eTimeHours > 6){
+			if (eTimeHours >= 6){
 				var startIns1 = sMonth+"/"+sDay+ " " +sMonth+"/"+sDay+" "+sTimeHours+":"+sTimeMinutes+" "+ "05:59:59 " +isci;
 				var startIns2 = oSMonth+"/"+oSDay+ " " +oSMonth+"/"+oSDay+" 06:00:00 "+eTimeHours+":"+eTimeMinutes+isci;
 				document.getElementById("output").innerHTML=startIns1+"<br>"+startIns2;
 		  }
+		  if (eTimeHours < 6){
+			  var startIns1 = sMonth+"/"+sDay+ " " +sMonth+"/"+sDay+" "+sTimeHours+":"+sTimeMinutes+" "+ "05:59:59 " +isci;
+			  var startIns2 = sMonth+"/"+sDay+ " " +sMonth+"/"+sDay+" 06:00:00 "+eTimeHours+":"+eTimeMinutes+isci;
+			  document.getElementById("output").innerHTML=startIns1+"<br>"+startIns2;
 		  
+			}
+		}
+		else{
+			if(eTimeHours >=6){
+				oEDay = eDay -1;
+				oEMonth=eMonth;
+				if (oEDay ==0){ // this does not seem to work.
+					var oEDay = 31;
+					var oEMonth = oEMonth-1;
+					alert("check days! anything labeled 30th should be 1 day from end of month");
+				}
+				var startIns1 = sMonth+"/"+sDay+ " " +sMonth+"/"+sDay+" "+sTimeHours+":"+sTimeMinutes+" "+ "05:59:59 " +isci;
+				var startIns2 = oSMonth+"/"+oSDay+ " " +oEMonth+"/"+oEDay+" 06:00:00 "+"5:59:59" +isci;
+				var startIns3 = eMonth+"/"+eDay+" "+eMonth+"/"+eDay+" 06:00:00 "+eTimeHours+":"+eTimeMinutes+" "+isci;
+				document.getElementById("output").innerHTML=startIns1+"<br>"+startIns2+"<br>"+startIns3;
+			} if (eTimeHours< 6){
+				oEDay = eDay -2; 
+				oEMonth = eMonth;
+				eDay = eDay - 1;
+				if (eDay ==0){
+					var eMonth = eMonth -1;
+					var eDay = 31;
+					alert("check days! anything labeled 30th should be 1 day from end of month");
+					// again not accounting for the different values of months (would be best to write a function for this):
+				}	
+				if (oEDay ==0){ // this does not seem to work.
+					var oEDay = 31;
+					var oEMonth = oEMonth-1;
+					alert("check days! anything labeled 30th should be 1 day from end of month");
+					// again not accounting for the different values of months (would be best to write a function for this):
+				}
+				if (oEDay ==-1){
+					var oEDay = 30;
+					var oEMonth = oEMonth-1;
+					alert("check days! anything labeled 30th should be 1 day from end of month");					
+					// again not accounting for the different values of months (would be best to write a function for this):
+				} if (eDay == oSDay && eMonth == oSMonth){ // this seems to work 
+					var startIns1 = sMonth+"/"+sDay+ " " +sMonth+"/"+sDay+" "+sTimeHours+":"+sTimeMinutes+" "+ "05:59:59 " +isci;
+					var startIns2 = eMonth+"/"+eDay+" "+eMonth+"/"+eDay+" 06:00:00 "+eTimeHours+":"+eTimeMinutes+" "+isci;
+					document.getElementById("output").innerHTML=startIns1+"<br>"+startIns2;					
+				}
+				else{
+					var startIns1 = sMonth+"/"+sDay+ " " +sMonth+"/"+sDay+" "+sTimeHours+":"+sTimeMinutes+" "+ "05:59:59 " +isci;
+					var startIns2 = oSMonth+"/"+oSDay+ " " +oEMonth+"/"+oEDay+" 06:00:00 "+"5:59:59" +isci;
+					var startIns3 = eMonth+"/"+eDay+" "+eMonth+"/"+eDay+" 06:00:00 "+eTimeHours+":"+eTimeMinutes+" "+isci;
+					document.getElementById("output").innerHTML=startIns1+"<br>"+startIns2+"<br>"+startIns3;
+				}
+			}
 		}
 	}
-	
-  alert("Still a work in progress! (Need to program unequal dates and end times ending on previous broadcast day)");
-  
+	else{
+		if(sDate == eDate){
+			if (eTimeHours < 6){
+				alert ("end date/time cannot be before start time");
+		  }
+		  if (eTimeHours >= 6){
+
+			  var startIns2 = sMonth+"/"+sDay+ " " +sMonth+"/"+sDay+" "+sTimeHours+":"+sTimeMinutes+" "+eTimeHours+":"+eTimeMinutes+isci;
+			  document.getElementById("output").innerHTML=startIns2;
+		  
+			}
+		}
+		else{
+			if(eTimeHours >=6){
+			  var startIns1 = sMonth+"/"+sDay+ " " +eMonth+"/"+eDay+" "+sTimeHours+":"+sTimeMinutes+" "+ "05:59:59 " +isci;
+			  var startIns2 = eMonth+"/"+eDay+" "+eMonth+"/"+eDay+" 06:00:00 "+eTimeHours+":"+eTimeMinutes+" "+isci;
+				document.getElementById("output").innerHTML=startIns1+"<br>"+startIns2;
+			} if (eTimeHours< 6){
+				oEDay = eDay -2; 
+				oEMonth = eMonth;
+				eDay = eDay - 1;
+				if (eDay ==0){
+					var eMonth = eMonth -1;
+					var eDay = 31;
+					alert("check days! anything labeled 30th should be 1 day from end of month");
+					// again not accounting for the different values of months (would be best to write a function for this):
+					}	
+				if (oEDay ==0){ // this does not seem to work.
+					var oEDay = 31;
+					var oEMonth = oEMonth-1;
+					alert("check days! anything labeled 30th should be 1 day from end of month");
+					// again not accounting for the different values of months (would be best to write a function for this):
+				}
+				if (oEDay ==-1){
+					var oEDay = 30;
+					var oEMonth = oEMonth-1;
+					alert("check days! anything labeled 30th should be 2 days from end of month");
+					// again not accounting for the different values of months (would be best to write a function for this):
+				} if (eDay == oSDay && eMonth == oSMonth){ // this seems to work 
+					var startIns1 = sMonth+"/"+sDay+ " " +sMonth+"/"+sDay+" "+sTimeHours+":"+sTimeMinutes+" "+ "05:59:59 " +isci;
+					var startIns2 = eMonth+"/"+eDay+" "+eMonth+"/"+eDay+" 06:00:00 "+eTimeHours+":"+eTimeMinutes+" "+isci;
+					document.getElementById("output").innerHTML=startIns1+"<br>"+startIns2;					
+				}
+				else{
+					var startIns1 = sMonth+"/"+sDay+ " " +oEMonth+"/"+oEDay+" "+sTimeHours+":"+sTimeMinutes+" "+ "05:59:59 " +isci;
+					var startIns2 = eMonth+"/"+eDay+" "+eMonth+"/"+eDay+" 06:00:00 "+eTimeHours+":"+eTimeMinutes+" "+isci;
+					document.getElementById("output").innerHTML=startIns1+"<br>"+startIns2;
+				}
+			}
+		}
+	}
 }
 
+// the only thing missing from this calculator should be what happens when the instructions start inside a broadcast day
 // 04/01/18 04/01/18 12:00 AM 11:59 PM DOWN MON 10/9C ABC25883SH :30 50% ER
-
