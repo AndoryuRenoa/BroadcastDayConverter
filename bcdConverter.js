@@ -155,7 +155,7 @@ function runDivData(){
 		  }
 		  if (eTimeHours < 6){
 			  var startIns1 = sMonth+"/"+sDay+ " " +sMonth+"/"+sDay+" "+sTimeHours+":"+sTimeMinutes+" "+ "05:59:59 " +isci;
-			  var startIns2 = sMonth+"/"+sDay+ " " +sMonth+"/"+sDay+" 06:00:00 "+eTimeHours+":"+eTimeMinutes+isci;
+// I think this line is a mistake  var startIns2 = sMonth+"/"+sDay+ " " +sMonth+"/"+sDay+" 06:00:00 "+eTimeHours+":"+eTimeMinutes+isci;
 			  document.getElementById("output").innerHTML=startIns1+"<br>"+startIns2;
 		  
 			}
