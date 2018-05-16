@@ -82,7 +82,7 @@ function runRawData(){
 
 
 function runDivData(){
-	// converts start time to military time (unfinished)
+	// converts start time to military time
 	var startTime= document.getElementById("startTime").value;
 	var findNext = startTime.search(":");
 	var sTimeHours = startTime.slice(0,findNext);
