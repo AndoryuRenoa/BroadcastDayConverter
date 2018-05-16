@@ -83,7 +83,6 @@ function runRawData(){
 
 function runDivData(){
 	// converts start time to military time (unfinished)
-	alert("Thank you for trying my converter! This requires testing before it can be relied on. If you see something wrong please tell me -Andrew");
 	var startTime= document.getElementById("startTime").value;
 	var findNext = startTime.search(":");
 	var sTimeHours = startTime.slice(0,findNext);
